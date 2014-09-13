@@ -1,0 +1,107 @@
+# Sublime Text
+################################
+
+*.sublime-*
+
+
+# ANDROID / ECLIPSE
+################################
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files - android project subfolder
+Android/bin/
+Android/gen/
+Android/assets/
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Idea project folder
+.idea/
+
+# IOS / Xcode
+################################
+build/*
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
+IOS/www/
+
+# OS files
+################################
+.DS_Store
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Temporary Files
+*.bak
+*.bak.*
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+# Temporary Folders
+pids
+logs
+results
+lib-cov
+
+# NODE JS
+################################
+node_modules
+npm-debug.log
+
+# CSS
+################################
+.sass-cache
+
+# BOWER
+################################
+app/bower_components
+bower_components
+app/lib
+
+# GRUNT BUILD
+################################
+dist/
+.tmp
+www/
+docs
+
+# Platforms
+################################
+
+# TODO : To find if platforms and plugins should be commited.
+platforms
+plugins
