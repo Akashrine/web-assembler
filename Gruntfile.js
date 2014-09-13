@@ -23,6 +23,8 @@ module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
 
+    pkg: grunt.file.readJSON('package.json'),
+
     config: {
       src: 'src',
       dist: 'dist'
@@ -106,7 +108,7 @@ module.exports = function (grunt) {
       },
       pages: {
         options: {
-          remote: 'git@github.com:<%= pkg.author %>/phaneendra.github.com.git',
+          remote: 'git@github.com:<%= pkg.author.name %>/phaneendra.github.com.git',
           branch: 'master'
         }
       },
