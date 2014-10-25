@@ -1,0 +1,47 @@
+///**
+//* Side Content
+//* -----------------------------------------------------------------------------
+//*
+//* Wrapper and base classes
+//*
+//* Style definition for a Side Cover
+//*/
+
+.side-content {
+    padding: 15px;
+    left:0px;
+    width: 100%;
+    height: 350px;
+    background: url(../img/designandprogram.jpeg) no-repeat center center;
+    background-size: cover;
+    .cover {
+        color: whitesmoke;
+        position: absolute;
+        bottom: 40px;
+    }
+}
+
+@media (min-width: 768px) {
+    .side-content {
+        height: 450px;
+    }
+}
+@media (min-width: 992px) {
+    .side-content {
+        width: 400px;
+        height: 100%;
+        position: fixed;
+        background-color: whitesmoke;
+        .cover {
+            padding: 0 20px;
+        }
+    }
+}
+@media (min-width: 1200px) {
+    .side-content {
+        width: 464px;
+        .cover {
+            padding: 0 30px;
+        }
+    }
+}

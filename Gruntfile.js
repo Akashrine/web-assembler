@@ -19,6 +19,7 @@ module.exports = function (grunt) {
 
   require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
+  var path = require('path');
 
   // Project configuration.
   grunt.initConfig({
@@ -31,8 +32,26 @@ module.exports = function (grunt) {
     },
 
     watch: {
+      bower: {
+        files: ['bower.json'],
+        tasks: ['bower', 'wiredep']
+      },
+      styles: {
+        files: ['<%= config.src %>/assets/less/**/*.less'],
+        tasks: ['less:dist']
+      },
+      js: {
+        files: ['<%= config.src %>/assets/**/*.js'],
+        tasks: ['jshint'],
+        options: {
+          livereload: true
+        }
+      },
+      gruntfile: {
+        files: ['Gruntfile.js']
+      },
       assemble: {
-        files: ['<%= config.src %>/{content,data,templates}/{,*/}*.{md,hbs,yml}'],
+        files: ['<%= config.src %>/{content,data,templates}/**/*.{md,hbs,yml}'],
         tasks: ['assemble']
       },
       livereload: {
@@ -65,39 +84,148 @@ module.exports = function (grunt) {
       }
     },
 
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc',
+        reporter: require('jshint-stylish')
+      },
+      all: [
+        'Gruntfile.js',
+        '<%= config.src %>/assets/**/*.js'
+      ]
+    },
+
+    autoprefixer: {
+      options: {
+        browsers: ['last 1 version']
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= config.dist %>/assets/css',
+          src: '**/*.css',
+          dest: '<%= config.dist %>/assets/css'
+        }]
+      }
+    },
+
+    less: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= config.src %>/assets/less/',
+          src: ['importer.less'],
+          dest: '<%= config.dist %>/assets/css/',
+          ext: '.css'
+        }]
+      }
+    },
+
     assemble: {
-      pages: {
+      options: {
+        flatten: true,
+        expand: true,
+
+        // Templates and data
+        layoutdir: '<%= config.src %>/templates/layouts',
+        layout: 'default.hbs',
+        data: '<%= config.src %>/data/*.{json,yml}',
+        partials: '<%= config.src %>/templates/partials/*.hbs',
+
+        // Site variables
+        assets: '<%= config.dist %>/assets',
+        collections: [{
+          name: 'post',
+          sortby: 'posted',
+          sortorder: 'descending'
+        }]
+      },
+
+      // Generate posts by forcing Handlebars
+      // to recognize `.md` files as templates.
+      posts: {
         options: {
-          flatten: true,
-          assets: '<%= config.dist %>/assets',
-          layout: '<%= config.src %>/templates/layouts/default.hbs',
-          data: '<%= config.src %>/data/*.{json,yml}',
-          partials: '<%= config.src %>/templates/partials/*.hbs'
+          flatten: false,
+          engine: 'handlebars',
+          layout: 'blog.hbs',
         },
-        files: {
-          '<%= config.dist %>/': ['<%= config.src %>/templates/pages/*.hbs']
+        files: [{
+          expand: true,
+          cwd: '<%= config.src %>/content/',
+          ext: '.html',
+          src: '**/*.md',
+          dest: '<%= config.dist %>/'
+        },{
+          expand: true,
+          cwd: '<%= config.src %>/templates/pages',
+          ext: '.html',
+          src: '**/*.hbs',
+          dest: '<%= config.dist %>/'
+        }]
+      }
+    },
+
+    bower: {
+      install: {
+        options: {
+          targetDir: '<%= config.dist %>/assets/lib',
+          layout: function(type, component, source) {
+            var re = new RegExp("(.*)\\\/"+component +"\\\/(.*)");
+            var newpath = source.replace(re, "$2");
+            newpath = newpath.substring(0, newpath.lastIndexOf('/'));
+            return path.join(component, newpath);
+          },
+          install: true,
+          verbose: false,
+          cleanTargetDir: true,
+          cleanBowerDir: false,
+          bowerOptions: {}
+        }
+      }
+    },
+
+    wiredep: {
+      app: {
+        ignorePath: /^<%= config.app %>\/|\.\.\/\.\.\/\.\.\/bower_components\//,
+        src: ['<%= assemble.options.layoutdir %>/*.hbs'],
+        fileTypes: {
+          hbs: {
+            block: /(([ \t]*)<!--\s*bower:*(\S*)\s*-->)(\n|\r|.)*?(<!--\s*endbower\s*-->)/gi,
+            detect: {
+              js: /<script.*src=['"]([^'"]+)/gi,
+              css: /<link.*href=['"]([^'"]+)/gi
+            },
+            replace: {
+              js: '<script src="assets/lib/{{filePath}}"></script>',
+              css: '<link rel="stylesheet" href="assets/lib/{{filePath}}" />'
+            }
+          }
         }
       }
     },
 
     copy: {
-      bootstrap: {
+      dist: {
         expand: true,
-        cwd: 'bower_components/bootstrap/dist/',
-        src: '**',
-        dest: '<%= config.dist %>/assets/'
-      },
-      theme: {
-        expand: true,
-        cwd: 'src/assets/',
-        src: '**',
-        dest: '<%= config.dist %>/assets/css/'
+        cwd: '<%= config.src %>/assets/',
+        src: ['**/*.!(coffee|less)'],
+        dest: '<%= config.dist %>/assets'
       }
     },
 
     // Before generating any new files,
     // remove any previously-created files.
-    clean: ['<%= config.dist %>/**/*.{html,xml}'],
+    clean: {
+      dist: {
+        files: [{
+          dot: true,
+          src: [
+            '<%= config.dist %>/*',
+            '!<%= config.dist %>/.git*'
+          ]
+        }]
+      },
+    },
 
     buildcontrol: {
       options: {
@@ -124,24 +252,30 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('assemble');
 
-  grunt.registerTask('server', [
+  grunt.registerTask('serve', [
     'build',
     'connect:livereload',
     'watch'
-  ]);
-
-  grunt.registerTask('build', [
-    'clean',
-    'copy',
-    'assemble'
-  ]);
-
-  grunt.registerTask('default', [
-    'build'
   ]);
 
   grunt.registerTask('deploy', [
     'build',
     'buildcontrol:pages'
   ]);
+
+  grunt.registerTask('build', [
+    'clean:dist',
+    'less',
+    'wiredep',
+    'bower:install',
+    'newer:copy:dist',
+    'autoprefixer',
+    'assemble'
+  ]);
+
+  grunt.registerTask('default', [
+    'newer:jshint',
+    'build'
+  ]);
+
 };

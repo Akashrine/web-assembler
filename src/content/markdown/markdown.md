@@ -1,3 +1,11 @@
+---
+title: "First!"
+posted: 2014-01-28
+post: true
+author: Phaneendra
+previewtext: This is a sample Markdown Post
+---
+
 [test]: http://google.com/ "Google"
 
 # A heading
@@ -5,6 +13,7 @@
 Just a note, I've found that I can't test my markdown parser vs others.
 For example, both markdown.js and showdown code blocks in lists wrong. They're
 also completely [inconsistent][test] with regards to paragraphs in list items.
+Ha so can i
 
 A link. Not anymore.
 

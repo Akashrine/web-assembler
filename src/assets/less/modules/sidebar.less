@@ -1,0 +1,58 @@
+/**
+ * Side Menu Navigation
+ * -----------------------------------------------------------------------------
+ *
+ * Wrapper and base classes
+ *
+ * Provides an collapsible side bar menu
+ */
+.page-sidebar {
+    height: 100%;
+    display: inline-block;
+    float: left;
+    position: fixed;
+    width: 250px;
+    margin-top:@navbar-height-small;
+    padding-bottom: 105px;
+    .nav > li {
+        > a {
+            i {
+                line-height: 20px;
+                position: relative;
+                font-size: 16px;
+                margin-right: 5px;
+                text-shadow: none;
+            }
+        }
+    }
+}
+/* Inverse Sidebar */
+.page-sidebar-inverse {
+    background-color: @navbar-inverse-bg;
+    .nav > li {
+        > a {
+            color: @navbar-inverse-link-color;
+            &:hover, &:focus {
+                color: @navbar-inverse-link-hover-color;
+                background-color: @navbar-inverse-link-hover-bg;
+            }
+        }
+    }
+}
+
+.menu-trigger {
+    z-index: 1080;
+    position: absolute;
+    display: block;
+    height: 40px;
+    width: 40px;
+    font-size: 24px;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    text-align: center;
+    vertical-align: middle;
+    background-color: @soft-black;
+    color: whitesmoke;
+}
+

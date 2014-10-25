@@ -2,7 +2,8 @@
   "name": "blog",
   "version": "0.1.0",
   "dependencies": {
-    "bootstrap": "~3.2.0"
+    "bootstrap": "~3.2.0",
+    "fontawesome": "~4.2.0"
   },
   "private": true
 }

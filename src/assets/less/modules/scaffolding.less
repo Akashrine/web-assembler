@@ -1,0 +1,114 @@
+//
+// Scaffolding
+// --------------------------------------------------
+
+
+// Body reset
+// -------------------------
+
+body {
+  font-family: @font-family-base;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  color: @text-color;
+  background-color: @body-bg;
+}
+
+span.block {
+  display: block;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-border {
+  border: 0;
+}
+
+.no-gutter {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.home-container {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+// Links
+// -------------------------
+
+a {
+  color: @link-color;
+  text-decoration: none;
+  .transition(.25s);
+
+  &:hover,
+  &:focus {
+    color: @link-hover-color;
+    text-decoration: none;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+// Images
+// -------------------------
+
+// Rounded corners
+.img-rounded {
+  border-radius: @border-radius-large;
+}
+
+// Image thumbnails
+//
+// Heads up! This is mixin-ed into thumbnails.less for `.thumbnail`.
+.img-thumbnail {
+  padding: @thumbnail-padding;
+  line-height: @line-height-base;
+  background-color: @thumbnail-bg;
+  border: 2px solid @thumbnail-border;
+  border-radius: @thumbnail-border-radius;
+  .transition(all .25s ease-in-out);
+
+  // Keep them at most 100% wide
+  .img-responsive(inline-block);
+}
+
+// Description text under image
+.img-comment {
+  font-size: ceil(@font-size-base * 0.8333); // ~15px
+  line-height: 1.2;
+  font-style: italic;
+  margin: 24px 0;
+}
+
+img.img30_30 {
+  width: 30px;
+  height: 30px;
+}
+img.img64_64 {
+  width: 64px;
+  height: 64px;
+}
+img.img80_80 {
+  width: 80px;
+  height: 80px;
+}
+
+// Icons
+// -------------------------
+
+.round-icon {
+    display: block;
+    text-align: center;
+}
+.round-icon.sm {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+    line-height: 35px;
+    border-radius: 35px;
+}

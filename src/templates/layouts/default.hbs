@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{title}} | {{site.title}}</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{{assets}}/css/bootstrap.min.css">
-
-    <!-- Bootstrap theme -->
-    <link href="{{assets}}/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- bower:css -->
+    <link rel="stylesheet" href="assets/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/lib/fontawesome/css/font-awesome.css" />
+    <!-- endbower -->
 
     <!-- Custom styles for this template -->
-    <link href="{{assets}}/css/theme.css" rel="stylesheet">
+    <link href="{{assets}}/css/importer.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,17 +22,11 @@
   </head>
   <body>
 
-    {{> navbar-fixed-top }}
+    {{> body }}
 
-    <div class="container theme-showcase" role="main">
-
-      {{> body }}
-
-    </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{assets}}/js/bootstrap.min.js"></script>
+    <!-- bower:js -->
+    <script src="assets/lib/jquery/dist/jquery.js"></script>
+    <script src="assets/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
   </body>
 </html>
