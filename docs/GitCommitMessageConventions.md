@@ -1,6 +1,6 @@
 # Git Commit Message Conventions
 
-I want to take a moment to elaborate on what makes a well formed commit message. I think the best practices for commit message formatting is one of the little details that makes Git great. 
+I want to take a moment to elaborate on what makes a well formed commit message. I think the best practices for commit message formatting is one of the little details that makes Git great.
 
 ## Goals
 Good commit messages should satisfy the below goals.
@@ -53,7 +53,6 @@ So maybe something like parts of the code: docs, docs-parser, compiler, scenario
 
 I know, you can find this information by checking which files had been changed, but that’s slow. And when looking in git history I can see all of us tries to specify the place, only missing the convention.
 
-
 ## Format of the commit message
 ```
 <capitalized type>(<scope>): <subject>
@@ -65,7 +64,7 @@ I know, you can find this information by checking which files had been changed, 
 
 Any line of the commit message cannot be longer 72 characters! This allows the message to be easier to read on github as well as in various git tools.
 
-### Subject line	
+### Subject line
 Subject line contains succinct description of the change.
 
 #### Allowed <type>
@@ -116,11 +115,11 @@ All breaking changes have to be mentioned in footer with the description of the 
 ```
 BREAKING CHANGE: isolate scope bindings definition has changed and
     the inject option for the directive controller injection was removed.
-    
+
     To migrate the code follow the example below:
-    
+
     Before:
-    
+
     scope: {
       myAttr: 'attribute',
       myBind: 'bind',
@@ -128,9 +127,9 @@ BREAKING CHANGE: isolate scope bindings definition has changed and
       myEval: 'evaluate',
       myAccessor: 'accessor'
     }
-    
+
     After:
-    
+
     scope: {
       myAttr: '@',
       myBind: '@',
@@ -138,7 +137,7 @@ BREAKING CHANGE: isolate scope bindings definition has changed and
       // myEval - usually not useful, but in cases where the expression is assignable, you can use '='
       myAccessor: '=' // in directive's template change myAccessor() to myAccessor
     }
-    
+
     The removed `inject` wasn't generaly useful for directives so there should be no code using it.
 ```
 
