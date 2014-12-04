@@ -1,0 +1,54 @@
+{
+  "client" : {
+    "css" : "**/*.css",
+    "js" : "**/*.js",
+    "less" : "assets/less/importer.less",
+    "sass" : "**/*.scss",
+    "images" : "",
+    "fonts" : "",
+    "assets" : ["assets/**/*.*", "!assets/**/{*.sass,*.js,*.less,*.coffee,.DS_Store}"],
+    "templates" : "/templates",
+    "views" : [
+      "**/*.html",
+      "**/*.hbs"
+    ]
+  },
+
+  "server" : {
+    "serverjs" : [
+      "gulpfile.js",
+      "server.js",
+      "src/config/**/*.js",
+      "src/modules/**/*.js"
+    ],
+    "models" : "src/modules/*/server/models/**/*.js",
+    "routes" : [
+      "src/modules/*[!core]/server/routes/**/*.js",
+      "src/modules/core/server/routes/**/*.js"
+    ],
+    "sockets" : "src/modules/*/server/sockets/**/*.js",
+    "config" : "src/modules/*/server/config/*.js",
+    "policies" : "src/modules/*/server/policies/*.js",
+    "views" : [
+      "src/modules/*/server/views/**/*.html",
+      "src/modules/*/server/views/**/*.hbs",
+      "src/modules/*/client/**/*.html",
+      "src/modules/*/client/**/*.hbs"
+    ],
+    "assets" : [
+      "src/modules/*/client/**/*.*",
+      "!src/modules/*/client/**/{*.sass,*.js,*.less,*.coffee,.DS_Store}"
+    ],
+    "css" : "src/modules/*/client/**/*.css",
+    "less" : "src/modules/*/client/assets/less/importer.less",
+    "sass" : "src/modules/*/client/**/*.scss",
+    "clientjs" : "src/modules/*/client/**/*.js"
+  },
+
+  "dist" : "www",
+  "src" : "src",
+  "config" : "src/config",
+  "content" : "src/content",
+  "themesPath" : "src/themes",
+  "modulesPath" : "src/modules"
+}
