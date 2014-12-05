@@ -6,6 +6,10 @@
  * Original version (pure JS) is created by Mary Lou http://tympanus.net/
  */
 
+/*global jQuery:false */
+
+'use strict';
+
 (function($) {
   $.fn.jPushMenu = function(customOptions) {
     var o = $.extend({}, $.fn.jPushMenu.defaultOptions, customOptions);
@@ -19,16 +23,16 @@
       e.stopPropagation();
 
       var target     = '',
-          push_direction = '';
+          pushDirection = '';
 
       // Determine menu and push direction
       if ($(this).is('.' + o.showLeftClass)) {
         target         = '.cbp-spmenu-left';
-        push_direction = 'toright';
+        pushDirection = 'toright';
       }
       else if ($(this).is('.' + o.showRightClass)) {
         target         = '.cbp-spmenu-right';
-        push_direction = 'toleft';
+        pushDirection = 'toleft';
       }
       else if ($(this).is('.' + o.showTopClass)) {
         target = '.cbp-spmenu-top';
@@ -37,15 +41,15 @@
         target = '.cbp-spmenu-bottom';
       }
 
-      if (target == '') {
+      if (target === '') {
         return;
       }
 
       $(this).toggleClass(o.activeClass);
       $(target).toggleClass(o.menuOpenClass);
 
-      if ($(this).is('.' + o.pushBodyClass) && push_direction != '') {
-        $('body').toggleClass(o.pushBodyClass + '-' + push_direction);
+      if ($(this).is('.' + o.pushBodyClass) && pushDirection !== '') {
+        $('body').toggleClass(o.pushBodyClass + '-' + pushDirection);
       }
 
       // Disable all other buttons
